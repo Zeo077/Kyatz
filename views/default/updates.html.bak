@@ -1,0 +1,18 @@
+{{left_sidebar_enabled,right_sidebar_enabled=False,True}}
+{{extend 'layout.html'}}
+<h1>This is the updates page</h1>
+<p>
+    This is arguably the most important page of the website.
+</p>
+<p>
+    Here the user will see a list of each comic they have subscribed to which has an update they have not yet read, with a number of how many unread pages are in each comic. Clicking on the link of a comic will take them to the first page of the comic they have not yet read, and update the user as having read that page.
+</p>
+
+{{block right_sidebar}}
+<h6>{{=T("Navigation Sidebar (not fully populated)")}}</h6>
+<ul>
+  <li>{{=A(T('Browse comics'), _href=URL('browse'))}}</li>
+  <li>{{=A(T('Check Updates'), _href=URL('updates'))}}</li>
+  <li>{{=A(T('List Subscriptions'), _href=URL('subscriptions'))}}</li>
+</ul>
+{{end}}

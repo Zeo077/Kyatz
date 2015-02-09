@@ -1,0 +1,31 @@
+{{left_sidebar_enabled,right_sidebar_enabled=False,True}}
+{{extend 'layout.html'}}
+
+{{block right_sidebar}}
+<h6>{{=T("Navigation Sidebar")}}</h6>
+<ul>
+  <li>{{=A(T('Browse comics'), _href=URL('browse'))}}</li>
+  <li>{{=A(T('Check Updates'), _href=URL('updates'))}}</li>
+  <li>{{=A(T('List Subscriptions'), _href=URL('subscriptions'))}}</li>
+</ul>
+{{end}}
+{{=title}}
+
+{{if img is not None:}}
+{{if img is not '':}}
+<img src={{=img}} height="256" width="256" />
+{{pass}}
+{{pass}}
+
+<p>
+{{if back_btn is not None:}}
+{{=back_btn}}
+{{pass}}
+
+{{if next_btn is not None:}}
+{{=next_btn}}
+{{pass}}
+</p>
+
+<p>{{=A(T('comment'), _class='btn',_href=URL('default','comment',args=args))}}</p>
+{{=post}}

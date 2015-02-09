@@ -1,0 +1,146 @@
+timestamp: 2015-02-09T14:17:47.432476
+CREATE TABLE auth_user(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    first_name CHAR(128),
+    last_name CHAR(128),
+    email CHAR(512),
+    username CHAR(128),
+    password CHAR(512),
+    registration_key CHAR(512),
+    reset_password_key CHAR(512),
+    registration_id CHAR(512),
+    subscribed TEXT
+);
+success!
+timestamp: 2015-02-09T14:17:47.437185
+CREATE TABLE auth_group(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    role CHAR(512),
+    description TEXT
+);
+success!
+timestamp: 2015-02-09T14:17:47.441241
+CREATE TABLE auth_membership(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    user_id INTEGER REFERENCES auth_user (id) ON DELETE CASCADE,
+    group_id INTEGER REFERENCES auth_group (id) ON DELETE CASCADE
+);
+success!
+timestamp: 2015-02-09T14:17:47.450899
+CREATE TABLE auth_permission(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    group_id INTEGER REFERENCES auth_group (id) ON DELETE CASCADE,
+    name CHAR(512),
+    table_name CHAR(512),
+    record_id INTEGER
+);
+success!
+timestamp: 2015-02-09T14:17:47.454648
+CREATE TABLE auth_event(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    time_stamp TIMESTAMP,
+    client_ip CHAR(512),
+    user_id INTEGER REFERENCES auth_user (id) ON DELETE CASCADE,
+    origin CHAR(512),
+    description TEXT
+);
+success!
+timestamp: 2015-02-09T14:17:47.457896
+CREATE TABLE auth_cas(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    user_id INTEGER REFERENCES auth_user (id) ON DELETE CASCADE,
+    created_on TIMESTAMP,
+    service CHAR(512),
+    ticket CHAR(512),
+    renew CHAR(1)
+);
+success!
+timestamp: 2015-02-09T14:17:47.466848
+CREATE TABLE files(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    file_url CHAR(512),
+    file_id INTEGER
+);
+success!
+timestamp: 2015-02-09T14:17:47.481047
+CREATE TABLE subscriptions(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    usr INTEGER REFERENCES auth_user (id) ON DELETE CASCADE,
+    c_id INTEGER REFERENCES comics (id) ON DELETE CASCADE,
+    last_read INTEGER REFERENCES page_table (id) ON DELETE CASCADE
+);
+success!
+timestamp: 2015-02-09T14:17:47.489750
+CREATE TABLE comments(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    author CHAR(512),
+    creation_date TIMESTAMP,
+    post_content TEXT,
+    comic_id INTEGER REFERENCES comics (id) ON DELETE CASCADE,
+    page_number INTEGER,
+    upvote INTEGER,
+    downvote INTEGER,
+    rating INTEGER,
+    h_level INTEGER,
+    parent INTEGER REFERENCES comments (id) ON DELETE CASCADE,
+    edited CHAR(1)
+);
+success!
+timestamp: 2015-02-09T14:17:47.559808
+CREATE TABLE votes(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    user_id INTEGER REFERENCES auth_user (id) ON DELETE CASCADE,
+    com_id INTEGER REFERENCES comments (id) ON DELETE CASCADE,
+    vote_dir CHAR(1)
+);
+success!
+timestamp: 2015-02-09T14:17:47.563488
+CREATE TABLE comics(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    title CHAR(512),
+    author CHAR(512),
+    first_page INTEGER REFERENCES page_table (id) ON DELETE CASCADE,
+    latest_page INTEGER REFERENCES page_table (id) ON DELETE CASCADE,
+    num_pages INTEGER,
+    RSS CHAR(512),
+    thumbnail CHAR(512),
+    last_ping TIMESTAMP
+);
+success!
+timestamp: 2015-02-09T14:17:47.581583
+CREATE TABLE page_table(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    comic INTEGER REFERENCES comics (id) ON DELETE CASCADE,
+    page_number INTEGER,
+    title CHAR(512),
+    link CHAR(512),
+    description CHAR(512),
+    published TIMESTAMP
+);
+success!
+timestamp: 2015-02-09T14:17:47.689208
+CREATE TABLE tags(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    tagname CHAR(512)
+);
+success!
+timestamp: 2015-02-09T14:17:47.693062
+CREATE TABLE tag2comment(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    tag_id INTEGER REFERENCES tags (id) ON DELETE CASCADE,
+    comment_id INTEGER REFERENCES comments (id) ON DELETE CASCADE
+);
+success!
+timestamp: 2015-02-09T14:17:47.697444
+CREATE TABLE tag2comic(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    tag_id INTEGER REFERENCES tags (id) ON DELETE CASCADE,
+    comic_id INTEGER REFERENCES comics (id) ON DELETE CASCADE
+);
+success!
+timestamp: 2015-02-09T14:17:47.707017
+CREATE TABLE test_db(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    test CHAR(512)
+);
+success!

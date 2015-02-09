@@ -1,0 +1,17 @@
+{{left_sidebar_enabled,right_sidebar_enabled=False,True}}
+{{extend 'layout.html'}}
+
+<h4>{{=T("Fancy Help Text")}}</h4>
+{{=T('This is the main page, which mainly exists to greet new users and direct them to the handy sidebar of navigation links and explain how the site works. This page is pretty bland and will be rewritten with help text.')}}
+<p>{{=A('test link comments', _href=URL('default','add'))}}</p>
+<p>{{=A('test link rss', _href=URL('default','rss'))}}</p>
+<p>{{=A('test link', _href=URL('default','import_rss'))}}</p>
+
+{{block right_sidebar}}
+<h6>{{=T("Navigation Sidebar (not fully populated)")}}</h6>
+<ul>
+  <li>{{=A(T('Browse comics'), _href=URL('browse'))}}</li>
+  <li>{{=A(T('Check Updates'), _href=URL('updates'))}}</li>
+  <li>{{=A(T('List Subscriptions'), _href=URL('subscriptions'))}}</li>
+</ul>
+{{end}}

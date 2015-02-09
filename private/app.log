@@ -1,0 +1,9 @@
+2014-08-15 12:52:22,373 DEBUG 5663 4439093248 get_configured_logger():153 Kyatz already exists
+2014-08-15 12:52:33,337 DEBUG 5663 4443299840 get_configured_logger():153 Kyatz already exists
+2014-08-15 12:52:45,942 DEBUG 5663 4451713024 get_configured_logger():153 Kyatz already exists
+2014-08-17 11:10:58,705 DEBUG 1241 4426416128 get_configured_logger():150 Kyatz logger created
+2015-02-09 14:00:45,386 DEBUG 3005 4450766848 get_configured_logger():150 Kyatz logger created
+2015-02-09 14:00:59,476 DEBUG 3005 4459180032 get_configured_logger():153 Kyatz already exists
+2015-02-09 14:01:22,603 DEBUG 3005 4480212992 get_configured_logger():153 Kyatz already exists
+2015-02-09 14:01:22,974 DEBUG 3005 4480212992 get_configured_logger():153 Kyatz already exists
+2015-02-09 14:03:05,204 DEBUG 3073 4453330944 get_configured_logger():150 Kyatz logger created

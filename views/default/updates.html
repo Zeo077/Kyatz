@@ -1,0 +1,37 @@
+{{left_sidebar_enabled,right_sidebar_enabled=False,True}}
+{{extend 'layout.html'}}
+<h1>Updates</h1>
+    {{for c_id in subs:}}
+    <p>
+        {{comic = db.comics(c_id)}}
+        {{q = (db.subscriptions.usr == auth.user_id) & (db.subscriptions.c_id == c_id)}}
+        {{last_read_ref = db(q).select().first().last_read}}
+        {{last_read = db.page_table(last_read_ref)}}
+        {{latest = db.page_table(comic.latest_page)}}
+        {{if(last_read_ref < 1):}}
+            {{count = latest.page_number}}
+            {{link = URL('default', 'goto_page', args=[c_id,1], user_signature=True)}}
+            {{=A(T(comic.title), _href=link)}}
+            {{=T("("+str(count)+" new)")}}
+        {{else:}}
+            {{if(latest.page_number > last_read.page_number):}}
+                {{count = latest.page_number - last_read.page_number}}
+                {{link = URL('default', 'goto_page', args=[c_id,(last_read.page_number+1)], user_signature=True)}}
+                {{=A(T(comic.title), _href=link)}}
+                {{=T("("+str(count)+" new)")}}
+            {{pass}}
+        {{pass}}
+        {{if last_read != latest:}}
+            {{=A(T('clear'), _class='btn',_href=URL('default','clear',args=c_id,user_signature=True))}}
+        {{pass}}
+    </p>
+    {{pass}}
+
+{{block right_sidebar}}
+<h6>{{=T("Navigation Sidebar")}}</h6>
+<ul>
+  <li>{{=A(T('Browse comics'), _href=URL('browse'))}}</li>
+  <li>{{=A(T('Check Updates'), _href=URL('updates'))}}</li>
+  <li>{{=A(T('List Subscriptions'), _href=URL('subscriptions'))}}</li>
+</ul>
+{{end}}
